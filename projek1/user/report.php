@@ -8,11 +8,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../icons/font-awesome-old/css/font-awesome.min.css">
-    <link href=".././vendor/chartist/css/chartist.min.css" rel="stylesheet">
-    <link href=".././css/style.css" rel="stylesheet">
+    <?php
+    include 'css.php';
+    ?>
 
 </head>
 
@@ -65,7 +63,8 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Home</li>
+                            <li class="breadcrumb-item active"><a href="./report.php">Pemesanan</a></li>
                         </ol>
                     </div>
                 </div>
@@ -116,17 +115,9 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src=".././vendor/global/global.min.js"></script>
-    <script src=".././js/quixnav-init.js"></script>
-    <script src=".././js/custom.min.js"></script>
-
-    <script src=".././vendor/chartist/js/chartist.min.js"></script>
-
-    <script src=".././vendor/moment/moment.min.js"></script>
-    <script src=".././vendor/pg-calendar/js/pignose.calendar.min.js"></script>
-
-
-    <script src=".././js/dashboard/dashboard-2.js"></script>
+    <?php
+    include 'js.php';
+    ?>
     <!-- Circle progress -->
 
 </body>
