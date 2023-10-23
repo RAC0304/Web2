@@ -1,11 +1,12 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $barang_id = $_POST['barang_id'];
+    $users_id = $_POST['id_users'];
 
     // Ambil data dari Barang berdasarkan ID
-    $query_select = "SELECT * FROM Barang WHERE id_barang = $barang_id";
+    $query_select = "SELECT * FROM barang WHERE id_barang = $barang_id";
     $result = mysqli_query($koneksi, $query_select);
     $data_barang = mysqli_fetch_assoc($result);
 

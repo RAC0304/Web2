@@ -71,23 +71,34 @@
                     <?php
                     include '../koneksi.php';
                     $no = 1;
-                    $data = mysqli_query($koneksi, "SELECT * FROM barang");
-                    while ($tampil = mysqli_fetch_array($data)) {
+                    $data_barang = mysqli_query($koneksi, "SELECT * FROM barang");
+                    while ($tampil = mysqli_fetch_array($data_barang)) {
+                        $barang_id = $tampil['id_barang'];
+                        // Ganti nama variabel dari $data ke $data_users
+                        $data_users = mysqli_query($koneksi, "SELECT users.id, login.username FROM users INNER JOIN login ON users.roleId = login.id_user where roleID='$_SESSION[username]'");
+                        // Jika Anda ingin mengambil id pengguna dari setiap baris, maka gunakan loop
+                        while ($user = mysqli_fetch_array($data_users)) {
+                            $user_id = $user['id'];
                     ?>
-                        <div class="card m-4" style="width: 18rem;">
-                            <img src="../images/barang/<?php echo $tampil['gambar']; ?>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $tampil['nama_barang']; ?></h5>
-                                <p class="card-text"><?php echo $tampil['deskripsi_barang']; ?></p>
-                                <p class="card-text text-primary"><?php echo $tampil['harga']; ?></p>
-                                <form action="proses_pindah.php" method="post">
-                                    <input type="hidden" name="barang_id" value="<?php echo $tampil['id']; ?>">
-                                    <input type="submit" class="btn btn-primary" value="CheckOut">
-                                </form>
+                            <div class="card m-4" style="width: 18rem;">
+                                <img src="../images/barang/<?php echo $tampil['gambar']; ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $tampil['nama_barang']; ?></h5>
+                                    <p class="card-text"><?php echo $tampil['deskripsi_barang']; ?></p>
+                                    <p class="card-text text-primary"><?php echo $tampil['harga']; ?></p>
+                                    <form action="proses_pindah.php" method="post">
+                                        <input type="hidden" name="barang_id" value="<?php echo $barang_id; ?>">
+                                        <input type="hidden" name="id_users" value="<?php echo $user_id; ?>">
+                                        <input type="submit" class="btn btn-primary" value="CheckOut">
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    <?php } ?>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
+
             </div>
         </div>
         <!--**********************************
