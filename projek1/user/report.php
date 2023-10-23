@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
@@ -67,12 +65,13 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Home</li>
+                            <li class="breadcrumb-item active"><a href="./report.php">Pemesanan</a></li>
                         </ol>
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-light table-bordered border-primary mt-3">
+                    <table class="table table-hover table-bordered border-primary mt-3">
                         <thead>
                             <tr>
                                 <th scope="col">ID Pesanan</th>
@@ -84,29 +83,6 @@
                                 <th scope="col">Status Pesanan</th>
                             </tr>
                         </thead>
-
-                        <tbody>
-                            <?php
-                                include '../koneksi.php';
-                                $no = 1;
-                                $data = mysqli_query($koneksi, "SELECT * FROM laporan_pesanan");
-                                while ($tampil = mysqli_fetch_array($data)) {
-                            ?>
-                            <tr>
-                                <th scope="row"><?php echo $no++; ?></th>
-
-                                <td><?php echo $tampil['nama_pelanggan']; ?></td>
-                                <td><?php echo $tampil['barang_dipesan']; ?></td>
-                                <td><?php echo $tampil['jumlah']; ?></td>
-                                <td><?php echo $tampil['total_harga']; ?></td>
-                                <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                <td><?php echo $tampil['status_pesanan']; ?></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <!-- <a href="#" class="btn btn-primary">Tambah Pesanan</a>
-                    <a href="#" class="btn btn-danger">Hapus Pesanan</a> -->
                 </div>
             </div>
         </div>
