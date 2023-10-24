@@ -97,7 +97,7 @@
                             while ($tampil = mysqli_fetch_array($data_barang)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $no++; ?></td>
                                     <td><?php echo $tampil['nama']; ?></td>
                                     <td><?php echo $tampil['nama_barang']; ?></td>
                                     <td><?php echo $tampil['jumlah']; ?></td>

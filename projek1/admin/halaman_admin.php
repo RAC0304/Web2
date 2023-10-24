@@ -94,10 +94,16 @@
                                 <div class="stat-icon d-inline-block">
                                     <i class="ti-user text-primary border-primary"></i>
                                 </div>
+                                <?php
+                                include '../koneksi.php';
+                                $total_users_query = mysqli_query($koneksi, "SELECT COUNT(*) FROM users");
+                                $total_users = mysqli_fetch_assoc($total_users_query)['COUNT(*)'];
+                                ?>
                                 <div class="stat-content d-inline-block">
                                     <div class="stat-text">Customer</div>
-                                    <div class="stat-digit">961</div>
+                                    <div class="stat-digit"><?php echo $total_users; ?></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
