@@ -88,15 +88,18 @@
 
                             $data_barang = mysqli_query(
                                 $koneksi,
-                                "SELECT users.nama, barang.nama_barang, barang.harga, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan
-                    FROM laporan_pesanan
-                    INNER JOIN users ON laporan_pesanan.id_users = users.id
-                    INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang where"
+                                "SELECT users.nama, barang.nama_barang, barang.harga, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan FROM laporan_pesanan INNER JOIN users ON laporan_pesanan.id_users = users.id INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang WHERE laporan_pesanan.id_users=8 "
                             );
                             while ($tampil = mysqli_fetch_array($data_barang)) {
                             ?>
                                 <tr>
-                                    <td></td>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $tampil['nama']; ?></td>
+                                    <td><?php echo $tampil['nama_barang']; ?></td>
+                                    <td><?php echo $tampil['jumlah']; ?></td>
+                                    <td><?php echo $tampil['harga']; ?></td>
+                                    <td><?php echo $tampil['tanggal_pesanan']; ?></td>
+                                    <td><?php echo $tampil['status_pesanan']; ?></td>
                                 </tr>
                             <?php
                             }

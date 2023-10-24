@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
@@ -88,22 +87,27 @@
 
                         <tbody>
                             <?php
-                                include '../koneksi.php';
-                                $no = 1;
-                                $data = mysqli_query($koneksi, "SELECT * FROM laporan_pesanan");
-                                while ($tampil = mysqli_fetch_array($data)) {
-                            ?>
-                            <tr>
-                                <th scope="row"><?php echo $no++; ?></th>
+                            include '../koneksi.php';
+                            $no = 1;
 
-                                <td><?php echo $tampil['nama_pelanggan']; ?></td>
-                                <td><?php echo $tampil['barang_dipesan']; ?></td>
-                                <td><?php echo $tampil['jumlah']; ?></td>
-                                <td><?php echo $tampil['total_harga']; ?></td>
-                                <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                <td><?php echo $tampil['status_pesanan']; ?></td>
-                            </tr>
-                            <?php } ?>
+                            $data_barang = mysqli_query(
+                                $koneksi,
+                                "SELECT users.nama, barang.nama_barang, barang.harga, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan FROM laporan_pesanan INNER JOIN users ON laporan_pesanan.id_users = users.id INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang "
+                            );
+                            while ($tampil = mysqli_fetch_array($data_barang)) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $tampil['nama']; ?></td>
+                                    <td><?php echo $tampil['nama_barang']; ?></td>
+                                    <td><?php echo $tampil['jumlah']; ?></td>
+                                    <td><?php echo $tampil['harga']; ?></td>
+                                    <td><?php echo $tampil['tanggal_pesanan']; ?></td>
+                                    <td><?php echo $tampil['status_pesanan']; ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
 
                     </table>
