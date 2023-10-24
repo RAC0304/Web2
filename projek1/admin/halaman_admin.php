@@ -164,11 +164,10 @@
                                     <table class="table student-data-table m-t-20">
                                         <thead>
                                             <tr>
-                                                <th>Subject</th>
-                                                <th>Grade Point</th>
-                                                <th>Percent Form</th>
-                                                <th>Percent Upto</th>
-                                                <th>Date</th>
+                                                <th>Produk</th>
+                                                <th>Stok</th>
+                                                <th>Sisa Stok</th>
+                                                <th>Terjual</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -181,10 +180,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -195,10 +190,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -209,10 +200,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -223,10 +210,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -237,10 +220,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -251,10 +230,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                             <tr>
                                                 <td>Class Test</td>
@@ -265,10 +240,6 @@
                                                 <td>
                                                     95.00
                                                 </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
                                             </tr>
                                         </tbody>
                                     </table>

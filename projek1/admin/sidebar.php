@@ -13,6 +13,8 @@
                     <li class="nav-label">Apps</li>
                     <li><a href="page_konsumen.php" aria-expanded="false"><i class="icon icon-app-store"></i><span class="nav-text">Konsumen</span></a>
                     </li>
+                    <li><a href="report_admin.php" aria-expanded="false"><i class="icon icon-app-report"></i><span class="nav-text">Report</span></a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
@@ -88,28 +87,29 @@
 
                         <tbody>
                             <?php
-                                include '../koneksi.php';
-                                $no = 1;
-                                $data = mysqli_query($koneksi, "SELECT * FROM laporan_pesanan");
-                                while ($tampil = mysqli_fetch_array($data)) {
+                            include '../koneksi.php';
+                            $no = 1;
+                            $data = mysqli_query($koneksi, "SELECT * FROM laporan_pesanan");
+                            while ($tampil = mysqli_fetch_array($data)) {
                             ?>
-                            <tr>
-                                <th scope="row"><?php echo $no++; ?></th>
+                                <tr>
+                                    <th scope="row"><?php echo $no++; ?></th>
 
-                                <td><?php echo $tampil['nama_pelanggan']; ?></td>
-                                <td><?php echo $tampil['barang_dipesan']; ?></td>
-                                <td><?php echo $tampil['jumlah']; ?></td>
-                                <td><?php echo $tampil['total_harga']; ?></td>
-                                <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                <td><?php echo $tampil['status_pesanan']; ?></td>
-                                <td scope="row">
-                                    <a href="#" class="btn btn-warning ms-6">On Going</a>
-                                    <a href="#" class="btn btn-success ms-6">Finish</a>
-                                    <form class="d-inline" action="proses_edit_statut.php" method="post">
-                                        <input type="hidden" name="id" value="Cancel">
-                                        <button class="btn btn-danger" type>Cancel</button>
-                                </td>
-                            </tr>
+                                    <td><?php echo $tampil['nama_pelanggan']; ?></td>
+                                    <td><?php echo $tampil['barang_dipesan']; ?></td>
+                                    <td><?php echo $tampil['jumlah']; ?></td>
+                                    <td><?php echo $tampil['total_harga']; ?></td>
+                                    <td><?php echo $tampil['tanggal_pesanan']; ?></td>
+                                    <td><?php echo $tampil['status_pesanan']; ?></td>
+                                    <td scope="row">
+                                        <a href="#" class="btn btn-warning ms-6">On Going</a>
+                                        <a href="#" class="btn btn-success ms-6">Finish</a>
+                                        <form class="d-inline" action="proses_edit_statut.php" method="post">
+                                            <input type="hidden" name="id" value="Cancel">
+                                            <button class="btn btn-danger" type>Cancel</button>
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </tbody>
 

@@ -7,13 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Focus - Bootstrap Admin Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../icons/font-awesome-old/css/font-awesome.min.css">
-    <link href=".././vendor/chartist/css/chartist.min.css" rel="stylesheet">
-    <link href=".././css/style.css" rel="stylesheet">
+    <?php
+    include 'css.php';
+    ?>
 
 </head>
 
@@ -46,7 +43,7 @@
     ***********************************-->
     <div id="main-wrapper">
 
-        <?php include 'nav_header.php'; ?>
+        <?php include 'navbar.php'; ?>
 
         <?php include 'header.php'; ?>
 
@@ -66,12 +63,13 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Home</li>
+                            <li class="breadcrumb-item active"><a href="./report.php">Pemesanan</a></li>
                         </ol>
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-light table-bordered border-primary mt-3">
+                    <table class="table table-hover table-bordered border-primary mt-3">
                         <thead>
                             <tr>
                                 <th scope="col">ID Pesanan</th>
@@ -84,7 +82,6 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <?php
                             include '../koneksi.php';
@@ -92,27 +89,33 @@
 
                             $data_barang = mysqli_query(
                                 $koneksi,
-                                "SELECT users.nama, barang.nama_barang, barang.harga, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan FROM laporan_pesanan INNER JOIN users ON laporan_pesanan.id_users = users.id INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang "
+                                "SELECT users.nama, barang.nama_barang, barang.harga,laporan_pesanan.id_pesanan, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan FROM laporan_pesanan INNER JOIN users ON laporan_pesanan.id_users = users.id INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang"
                             );
                             while ($tampil = mysqli_fetch_array($data_barang)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo "PSN " . $no++; ?></td>
                                     <td><?php echo $tampil['nama']; ?></td>
                                     <td><?php echo $tampil['nama_barang']; ?></td>
                                     <td><?php echo $tampil['jumlah']; ?></td>
                                     <td><?php echo $tampil['harga']; ?></td>
                                     <td><?php echo $tampil['tanggal_pesanan']; ?></td>
                                     <td><?php echo $tampil['status_pesanan']; ?></td>
+                                    <td scope="row">
+                                        <form class="sm-d-inline" action="proses_edit_status.php" method="post">
+                                            <select name="status" class="form-select">
+                                                <option value="On Going">On Going</option>
+                                                <option value="Finish">Finish</option>
+                                                <option value="Cancel">Cancel</option>
+                                                <input type="hidden" name="pesanan_id" value="<?php echo $tampil['id_pesanan']; ?>">
+                                            </select> <button class="btn btn-success" type>Update</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php
                             }
                             ?>
                         </tbody>
-
-                    </table>
-                    <a href="#" class="btn btn-primary">Proses Pesanan</a>
-                    <a href="#" class="btn btn-danger">Hapus Pesanan</a>
                 </div>
             </div>
         </div>
@@ -147,17 +150,9 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src=".././vendor/global/global.min.js"></script>
-    <script src=".././js/quixnav-init.js"></script>
-    <script src=".././js/custom.min.js"></script>
-
-    <script src=".././vendor/chartist/js/chartist.min.js"></script>
-
-    <script src=".././vendor/moment/moment.min.js"></script>
-    <script src=".././vendor/pg-calendar/js/pignose.calendar.min.js"></script>
-
-
-    <script src=".././js/dashboard/dashboard-2.js"></script>
+    <?php
+    include 'js.php';
+    ?>
     <!-- Circle progress -->
 
 </body>
