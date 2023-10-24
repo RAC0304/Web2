@@ -80,6 +80,7 @@
                                 <h5 class="card-title"><?php echo $tampil['nama_barang']; ?></h5>
                                 <p class="card-text"><?php echo $tampil['deskripsi_barang']; ?></p>
                                 <p class="card-text text-primary"><?php echo $tampil['harga']; ?></p>
+                                <p class="card-text"> Stok tinggal: <?php echo $tampil['stok']; ?></p>
                                 <form action="proses_pindah.php" method="post">
                                     <input type="hidden" name="barang_id" value="<?php echo $tampil['id_barang']; ?>">
                                     <input type="submit" class="btn btn-primary" value="CheckOut">
