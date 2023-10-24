@@ -81,6 +81,27 @@
                                 <th scope="col">Status Pesanan</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            include '../koneksi.php';
+                            $no = 1;
+                            $data_barang = mysqli_query(
+                                $koneksi,
+                                "SELECT users.nama, barang.nama_barang, barang.harga, laporan_pesanan.jumlah, laporan_pesanan.tanggal_pesanan, laporan_pesanan.status_pesanan
+                    FROM laporan_pesanan
+                    INNER JOIN users ON laporan_pesanan.id_users = users.id
+                    INNER JOIN barang ON laporan_pesanan.id_barang = barang.id_barang"
+                            );
+                            while ($tampil = mysqli_fetch_array($data_barang)) {
+                            ?>
+                                <tr>
+
+                                </tr>
+
+                            <?php
+                            }
+                            ?>
+                        </tbody>
                 </div>
             </div>
         </div>
