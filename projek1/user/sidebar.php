@@ -13,7 +13,7 @@
               <li class="nav-label">Kategori</li>
               <!-- <li><a href="javascript:void()" aria-expanded="false"><i class="fa fa-shopping-bag"></i><span class="nav-text">Produk</span></a> -->
               <li><a href="report.php" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="nav-text">Pemesanan</span></a>
-              <li><a href="#" aria-expanded="false"><i class="fa fa-question-circle"></i><span class="nav-text">Bantuan</span></a>
+              <li><a href="transaksi.php" aria-expanded="false"><i class="fa fa-exchange"></i><span class="nav-text">transaksi</span></a>
               </li>
           </ul>
       </div>
