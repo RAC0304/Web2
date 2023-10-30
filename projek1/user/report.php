@@ -151,14 +151,14 @@
                                 ?>
                             </tbody>
                         </table>
-                        <form action="proses_transaksi.php" method="post">
+                        <form action="proses_transaksi.php" method="post" onsubmit="return validateForm()">
                             <?php foreach ($data_pesanan as $id_pesanan) : ?>
                                 <input type="hidden" name="id_pesanan[]" value="<?php echo $id_pesanan; ?>">
                             <?php endforeach; ?>
                             <div class="form-group">
                                 <label for="metode_pembayaran" class="text-black">Metode Pembayaran</label>
                                 <select name="metode_pembayaran" class="form-control" style="width: auto;" required>
-                                    <option selected disabled>Pilih Metode Pembayaran Disini...</option>
+                                    <option selected disabled value="">Pilih Metode Pembayaran Disini...</option>
                                     <option value="VA">Virtual Account</option>
                                     <option value="Transfer">Transfer Bank</option>
                                 </select>
@@ -209,6 +209,16 @@
     <?php
     include 'js.php';
     ?>
+    <script>
+        function validateForm() {
+            var metode_pembayaran = document.getElementsByName("metode_pembayaran")[0].value;
+            if (metode_pembayaran == "") {
+                alert("Harap pilih metode pembayaran!");
+                return false;
+            }
+            return true;
+        }
+    </script>
     <!-- Circle progress -->
 
 </body>

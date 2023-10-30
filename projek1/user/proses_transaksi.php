@@ -31,7 +31,7 @@ foreach ($_POST['id_pesanan'] as $id_pesanan) {
 
         // Masukkan data ke tabel transaksi
         $query_insert_transaksi = "INSERT INTO transaksi (id_transaksi, id_pesanan, metode_pembayaran, total_harga) 
-                                VALUES ('', $id_pesanan, '$metode_pembayaran', $total_harga)";
+                                VALUES ('$unique_transaction_code', $id_pesanan, '$metode_pembayaran', $total_harga)";
         mysqli_query($koneksi, $query_insert_transaksi);
 
         // Update status pesanan
