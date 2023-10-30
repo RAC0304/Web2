@@ -69,91 +69,109 @@
                     </div>
                 </div>
                 <div class="row">
-                    <table class="table table-hover table-bordered border-primary mt-3">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID Pesanan</th>
-                                <th scope="col">Nama Pelanggan</th>
-                                <th scope="col">Barang Pesanan</th>
-                                <th scope="col">Jumlah Barang</th>
-                                <th scope="col">Total Harga</th>
-                                <th scope="col">Tanggal Pesanan</th>
-                                <th scope="col" colspan="2">Status Pesanan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include '../koneksi.php';
-                            $no = 1;
-                            //Dapatkan id dari table users berdasarkan username pengguna yang telah login
-                            $username = $_SESSION['username'];
-                            $query_get_id_users =
-                                "SELECT users.id 
-                                FROM login
-                                INNER JOIN users ON login.id_user = users.roleId 
-                                WHERE login.username = '$username'";
-                            $result_id_users = mysqli_query($koneksi, $query_get_id_users);
-                            $row_id_users = mysqli_fetch_assoc($result_id_users);
-                            $id_users = $row_id_users['id'];
+                    <?php
+                    include '../koneksi.php';
+                    $no = 1;
 
+                    //Dapatkan id dari table users berdasarkan username pengguna yang telah login
+                    $username = $_SESSION['username'];
+                    $query_get_id_users =
+                        "SELECT users.id 
+    FROM login
+    INNER JOIN users ON login.id_user = users.roleId 
+    WHERE login.username = '$username'";
+                    $result_id_users = mysqli_query($koneksi, $query_get_id_users);
+                    $row_id_users = mysqli_fetch_assoc($result_id_users);
+                    $id_users = $row_id_users['id'];
+                    $data_pesanan = array();
+                    //Ambil data pesanan dari database
+                    $data_barang = mysqli_query(
+                        $koneksi,
+                        "SELECT
+                        users.nama,
+                        barang.nama_barang,
+                        barang.harga,
+                        laporan_pesanan.jumlah,
+                        laporan_pesanan.tanggal_pesanan,
+                        laporan_pesanan.status_pesanan,
+                        laporan_pesanan.id_pesanan,
+                        (laporan_pesanan.jumlah * barang.harga) AS total_harga
+                        FROM laporan_pesanan
+                        INNER JOIN users
+                        ON laporan_pesanan.id_users = users.id
+                        INNER JOIN barang
+                        ON laporan_pesanan.id_barang = barang.id_barang
+                        WHERE laporan_pesanan.id_users = $id_users
+                        AND laporan_pesanan.status_pesanan = 'Belum Bayar'"
+                    );
 
-                            $data_barang = mysqli_query(
-                                $koneksi,
-                                "SELECT
-                                users.nama,
-                                barang.nama_barang,
-                                barang.harga,
-                                laporan_pesanan.jumlah,
-                                laporan_pesanan.tanggal_pesanan,
-                                laporan_pesanan.status_pesanan,
-                                laporan_pesanan.id_pesanan,
-                                (laporan_pesanan.jumlah * barang.harga) AS total_harga
-                                FROM laporan_pesanan
-                                INNER JOIN users
-                                ON laporan_pesanan.id_users = users.id
-                                INNER JOIN barang
-                                ON laporan_pesanan.id_barang = barang.id_barang
-                                WHERE laporan_pesanan.id_users = $id_users
-                                AND laporan_pesanan.status_pesanan = 'On Going'"
-                            );
-                            while ($tampil = mysqli_fetch_array($data_barang)) {
-                                $total_harga = $tampil['total_harga']; // Dapatkan hasil perkalian jumlah dan harga
+                    //Periksa apakah ada data pesanan
+                    if (mysqli_num_rows($data_barang) > 0) {
+                    ?>
 
-                                // Konversi ke format rupiah
-                                $total_harga_rupiah = "Rp " . number_format($total_harga, 0, ',', '.');
-                            ?>
+                        <table class="table table-hover table-bordered border-primary mt-3">
+                            <thead>
                                 <tr>
-                                    <td><?php echo "PSN " . $no++; ?></td>
-                                    <td><?php echo $tampil['nama']; ?></td>
-                                    <td><?php echo $tampil['nama_barang']; ?></td>
-                                    <td>
-                                        <form action="proses_edit_jumlah.php" method="post"> <!-- Ganti 'proses_edit_jumlah.php' dengan nama file yang sesuai -->
-                                            <input type="hidden" name="id_pesanan" value="<?php echo $tampil['id_pesanan']; ?>">
-                                            <input type="number" name="jumlah" value="<?php echo $tampil['jumlah']; ?>" style="width:60px;">
-                                            <input type="submit" value="Simpan" class="btn btn-outline-primary btn-sm">
-                                        </form>
-                                    </td>
-                                    <td><?php echo $total_harga_rupiah; ?></td>
-                                    <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                    <td><?php echo $tampil['status_pesanan']; ?></td>
+                                    <th scope="col">ID Pesanan</th>
+                                    <th scope="col">Nama Pelanggan</th>
+                                    <th scope="col">Barang Pesanan</th>
+                                    <th scope="col">Jumlah Barang</th>
+                                    <th scope="col">Total Harga</th>
+                                    <th scope="col">Tanggal Pesanan</th>
+                                    <th scope="col" colspan="2">Status Pesanan</th>
                                 </tr>
-                                <form action="proses_metode_pembayaran.php" method="post">
-                                    <input type="hidden" name="id_pesanan" value="<?php echo $tampil['id_pesanan']; ?>">
+                            </thead>
+                            <tbody>
+                                <?php
+                                while ($tampil = mysqli_fetch_array($data_barang)) {
+                                    $total_harga = $tampil['total_harga']; // Dapatkan hasil perkalian jumlah dan harga
+                                    // Konversi ke format rupiah
+                                    $total_harga_rupiah = "Rp " . number_format($total_harga, 0, ',', '.');
+                                    $id_pesanan = $tampil['id_pesanan']; // Simpan id_pesanan dalam variabel
 
-                                    <div class="form-group">
-                                        <label for="metode_pembayaran" class="text-black">Metode Pembayaran</label>
-                                        <select name="metode_pembayaran" class="form-control">
-                                            <option selected disabled>Pilih Metode Pembayaran</option>
-                                            <option value="VA">Kartu Kredit</option>
-                                            <option value="Transfer">Transfer Bank</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-sm">Pesan</button>
-                                </form>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
+                                    $data_pesanan[] = $id_pesanan; // Simpan id_pesanan dalam array
+                                ?>
+                                    <tr>
+                                        <td><?php echo "PSN " . $no++; ?></td>
+                                        <td><?php echo $tampil['nama']; ?></td>
+                                        <td><?php echo $tampil['nama_barang']; ?></td>
+                                        <td>
+                                            <form action="proses_edit_jumlah.php" method="post"> <input type="hidden" name="id_pesanan" value="<?php echo $tampil['id_pesanan']; ?>">
+                                                <input type="number" name="jumlah" value="<?php echo $tampil['jumlah']; ?>" style="width:60px;">
+                                                <input type="submit" value="Simpan" class="btn btn-outline-primary btn-sm">
+                                            </form>
+                                        </td>
+                                        <td><?php echo $total_harga_rupiah; ?></td>
+                                        <td><?php echo $tampil['tanggal_pesanan']; ?></td>
+                                        <td><?php echo $tampil['status_pesanan']; ?></td>
+                                    </tr>
+
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <form action="proses_transaksi.php" method="post">
+                            <?php foreach ($data_pesanan as $id_pesanan) : ?>
+                                <input type="hidden" name="id_pesanan[]" value="<?php echo $id_pesanan; ?>">
+                            <?php endforeach; ?>
+                            <div class="form-group">
+                                <label for="metode_pembayaran" class="text-black">Metode Pembayaran</label>
+                                <select name="metode_pembayaran" class="form-control" style="width: auto;" required>
+                                    <option selected disabled>Pilih Metode Pembayaran Disini...</option>
+                                    <option value="VA">Virtual Account</option>
+                                    <option value="Transfer">Transfer Bank</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Pesan</button>
+                        </form>
+
+                    <?php
+                    } else {
+                        echo "Data pesanan tidak ditemukan.";
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>

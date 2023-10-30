@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      VALUES (
                         '10',
                         current_timestamp(),
-                        'proses',
+                        'Belum Bayar',
                         '{$data_users['id']}',
                         '{$data_barang['id_barang']}'
                      )";
