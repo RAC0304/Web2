@@ -77,9 +77,9 @@
                     $username = $_SESSION['username'];
                     $query_get_id_users =
                         "SELECT users.id 
-    FROM login
-    INNER JOIN users ON login.id_user = users.roleId 
-    WHERE login.username = '$username'";
+                            FROM login
+                            INNER JOIN users ON login.id_user = users.roleId 
+                            WHERE login.username = '$username'";
                     $result_id_users = mysqli_query($koneksi, $query_get_id_users);
                     $row_id_users = mysqli_fetch_assoc($result_id_users);
                     $id_users = $row_id_users['id'];
@@ -112,13 +112,12 @@
                         <table class="table table-hover table-bordered border-primary mt-3">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID Pesanan</th>
+                                    <th scope="col">Pesanan</th>
                                     <th scope="col">Nama Pelanggan</th>
                                     <th scope="col">Barang Pesanan</th>
                                     <th scope="col">Jumlah Barang</th>
                                     <th scope="col">Total Harga</th>
                                     <th scope="col">Tanggal Pesanan</th>
-                                    <th scope="col" colspan="2">Status Pesanan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -132,7 +131,7 @@
                                     $data_pesanan[] = $id_pesanan; // Simpan id_pesanan dalam array
                                 ?>
                                     <tr>
-                                        <td><?php echo "PSN " . $no++; ?></td>
+                                        <td><?php echo "Pesanan " . $no++; ?></td>
                                         <td><?php echo $tampil['nama']; ?></td>
                                         <td><?php echo $tampil['nama_barang']; ?></td>
                                         <td>
@@ -143,7 +142,6 @@
                                         </td>
                                         <td><?php echo $total_harga_rupiah; ?></td>
                                         <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                        <td><?php echo $tampil['status_pesanan']; ?></td>
                                     </tr>
 
                                 <?php

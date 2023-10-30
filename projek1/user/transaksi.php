@@ -69,6 +69,38 @@
                     </div>
                 </div>
                 <div class="row">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col">NO</th>
+                                <th scope="col">ID Transaksi</th>
+                                <th scope="col">Metode Pembayaran</th>
+                                <th scope="col">Total Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include '../koneksi.php';
+                            // Mengambil data transaksi dari database
+                            $no = 1;
+                            $query_transaksi = "SELECT id_transaksi, metode_pembayaran, SUM(total_harga) as total_harga
+                                                FROM transaksi
+                                                GROUP BY id_transaksi";
+                            $result_transaksi = mysqli_query($koneksi, $query_transaksi);
+                            while ($row_transaksi = mysqli_fetch_assoc($result_transaksi)) {
+                                $total_harga = $row_transaksi['total_harga']; // Dapatkan hasil perkalian jumlah dan harga
+                                $total_harga_rupiah = "Rp " . number_format($total_harga, 0, ',', '.');
+                            ?>
+                                <tr>
+                                    <th scope="row"><?php echo $no++; ?></th>
+                                    <td><?php echo $row_transaksi['id_transaksi']; ?></td>
+                                    <td><?php echo $row_transaksi['metode_pembayaran']; ?></td>
+                                    <td><?php echo $total_harga_rupiah; ?></td>
+                                    <td></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
