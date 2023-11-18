@@ -19,7 +19,7 @@
     session_start();
 
     // cek apakah yang mengakses halaman ini sudah login
-    if ($_SESSION['level'] == "") {
+    if ($_SESSION['level'] == "admin" && "user") {
         header("location:index.php?pesan=gagal");
     }
     ?>
@@ -66,41 +66,36 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Main Menu</li>
-                            <li class="breadcrumb-item active"><a href="./halaman_user.php">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="./halaman_karyawan.php">Profile</a></li>
                         </ol>
                     </div>
                 </div>
                 <div class="row">
-                    <?php
-                    if (isset($_GET['checkout'])) {
-                        if ($_GET['checkout'] == "success") {
-                            echo "<div class='alert alert-success' role='alert' data-dismiss='alert' data-delay='2000'>CheckOut Berhasil</div>";
-                        }
-                    }
-                    ?>
-                </div>
-                <div class="row">
+                    <h1>Biodata Karyawan</h1>
                     <?php
                     include '../koneksi.php';
-                    $no = 1;
-                    $data_barang = mysqli_query($koneksi, "SELECT * FROM barang");
-                    while ($tampil = mysqli_fetch_array($data_barang)) {
+
+                    $query = "SELECT * FROM karyawan";
+                    $result = mysqli_query($koneksi, $query);
+
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
                     ?>
-                        <div class="card m-4" style="width: 18rem;">
-                            <img src="../images/barang/<?php echo $tampil['gambar']; ?>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $tampil['nama_barang']; ?></h5>
-                                <p class="card-text"><?php echo $tampil['deskripsi_barang']; ?></p>
-                                <p class="card-text text-primary"><?php echo $tampil['harga']; ?></p>
-                                <p class="card-text"> Stok tinggal: <?php echo $tampil['stok']; ?></p>
-                                <form action="proses_pindah.php" method="post">
-                                    <input type="hidden" name="barang_id" value="<?php echo $tampil['id_barang']; ?>">
-                                    <input type="submit" class="btn btn-primary" value="CheckOut">
-                                </form>
+                            <div class="card m-2" style="width: 18rem;">
+                                <img src="../images/avatar/1.png" class="card-img-top" alt="<?php echo $row['nama']; ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $row['nama']; ?></h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
                             </div>
-                        </div>
                     <?php
+                        }
+                    } else {
+                        echo '<p>Tidak ada data karyawan.</p>';
                     }
+
+                    mysqli_close($koneksi);
                     ?>
                 </div>
 

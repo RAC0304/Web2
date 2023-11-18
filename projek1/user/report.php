@@ -56,14 +56,13 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Hi, <?php echo $_SESSION['username']; ?></h4>
-                            <p class="mb-0">Your business dashboard template</p>
-                        </div>
+                        <?php
+                        include '../welcome.php';
+                        ?>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">Home</li>
+                            <li class="breadcrumb-item active">Main Menu</li>
                             <li class="breadcrumb-item active"><a href="./report.php">Pemesanan</a></li>
                         </ol>
                     </div>

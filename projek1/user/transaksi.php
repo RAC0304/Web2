@@ -56,15 +56,16 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Hi, <?php echo $_SESSION['username']; ?></h4>
-                            <p class="mb-0">Your business dashboard template</p>
+                        <div class="col-sm-6 p-md-0">
+                            <?php
+                            include '../welcome.php';
+                            ?>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">Home</li>
-                            <li class="breadcrumb-item active"><a href="./report.php">Transaksi</a></li>
+                            <li class="breadcrumb-item active">Main Menu</li>
+                            <li class="breadcrumb-item active"><a href="./transaksi.php">Transaksi</a></li>
                         </ol>
                     </div>
                 </div>
@@ -76,6 +77,7 @@
                                 <th scope="col">ID Transaksi</th>
                                 <th scope="col">Metode Pembayaran</th>
                                 <th scope="col">Total Harga</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,7 +98,10 @@
                                     <td><?php echo $row_transaksi['id_transaksi']; ?></td>
                                     <td><?php echo $row_transaksi['metode_pembayaran']; ?></td>
                                     <td><?php echo $total_harga_rupiah; ?></td>
-                                    <td></td>
+                                    <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailTransaksi">
+                                            Detail
+                                        </button>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -109,6 +114,25 @@
             Content body end
         ***********************************-->
 
+        <!-- modal detail transaksi -->
+        <div class="modal fade" id="detailTransaksi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal -->
 
         <!--**********************************
             Footer start

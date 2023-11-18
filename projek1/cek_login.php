@@ -36,6 +36,12 @@ if ($cek > 0) {
         $_SESSION['level'] = "user";
         // alihkan ke halaman dashboard pegawai
         header("location:user/halaman_user.php");
+    } else if ($data['level'] == "karyawan") {
+        // buat session login dan username
+        $_SESSION['username'] = $username;
+        $_SESSION['level'] = "karyawan";
+        // alihkan ke halaman dashboard pegawai
+        header("location:karyawan/halaman_karyawan.php");
     } else {
 
         // alihkan ke halaman login kembali

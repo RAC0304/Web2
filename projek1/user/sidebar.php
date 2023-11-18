@@ -15,6 +15,9 @@
               <li><a href="report.php" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="nav-text">Pemesanan</span></a>
               <li><a href="transaksi.php" aria-expanded="false"><i class="fa fa-exchange"></i><span class="nav-text">transaksi</span></a>
               </li>
+              <li><a href="karyawan.php" aria-expanded="false"><i class="icon icon-users-mm-2"></i><span class="nav-text">Karyawan</span></a>
+              </li>
+
           </ul>
       </div>
   </div>

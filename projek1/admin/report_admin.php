@@ -56,15 +56,14 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Hi, <?php echo $_SESSION['username']; ?></h4>
-                            <p class="mb-0">Your business dashboard template</p>
-                        </div>
+                        <?php
+                        include '../welcome.php';
+                        ?>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">Home</li>
-                            <li class="breadcrumb-item active"><a href="./report.php">Pemesanan</a></li>
+                            <li class="breadcrumb-item active">Main Menu</li>
+                            <li class="breadcrumb-item active"><a href="./report_admin.php">Pemesanan</a></li>
                         </ol>
                     </div>
                 </div>
@@ -100,12 +99,24 @@
                                     <td><?php echo $tampil['jumlah']; ?></td>
                                     <td><?php echo $tampil['harga']; ?></td>
                                     <td><?php echo $tampil['tanggal_pesanan']; ?></td>
-                                    <td><?php echo $tampil['status_pesanan']; ?></td>
+                                    <td>
+                                        <?php
+                                        $status_pesanan = $tampil['status_pesanan'];
+
+                                        if ($status_pesanan === 'Sudah Dibayar') {
+                                            echo '<span class="badge badge-primary">' . $status_pesanan . '</span>';
+                                        } elseif ($status_pesanan === 'Belum Dibayar') {
+                                            echo '<span class="badge badge-warning">' . $status_pesanan . '</span>';
+                                        } else {
+                                            echo '<span class="badge badge-danger">' . $status_pesanan . '</span>';
+                                        }
+                                        ?>
+                                    </td>
                                     <td scope="row">
                                         <form class="sm-d-inline" action="proses_edit_status.php" method="post">
                                             <select name="status" class="form-select">
-                                                <option value="On Going">On Going</option>
-                                                <option value="Finish">Finish</option>
+                                                <option value="Sudah Dibayar">Sudah Dibayar</option>
+                                                <option value="Belum Dibayar">Belum Dibayar</option>
                                                 <option value="Cancel">Cancel</option>
                                                 <input type="hidden" name="pesanan_id" value="<?php echo $tampil['id_pesanan']; ?>">
                                             </select> <button class="btn btn-success" type>Update</button>
