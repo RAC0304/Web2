@@ -15,7 +15,7 @@
                     </li>
                     <li><a href="report_admin.php" aria-expanded="false"><i class="icon icon-chart-bar-33"></i><span class="nav-text">Report</span></a>
                     </li>
-                    <li><a href="#" aria-expanded="false"><i class="icon icon-users-mm-2"></i><span class="nav-text">Data Karyawan</span></a>
+                    <li><a href="halaman_karyawan.php" aria-expanded="false"><i class="icon icon-users-mm-2"></i><span class="nav-text">Data Karyawan</span></a>
                     </li>
 
                 </ul>
