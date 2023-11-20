@@ -43,7 +43,7 @@
     ***********************************-->
     <div id="main-wrapper">
 
-        <?php include 'navbar.php'; ?>
+        <?php include 'nav_header.php'; ?>
 
         <?php include 'header.php'; ?>
 
@@ -66,7 +66,7 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">Main Menu</li>
-                            <li class="breadcrumb-item active"><a href="./halaman_karyawan.php">Profile</a></li>
+                            <li class="breadcrumb-item active"><a href="./karyawan.php">Karyawan</a></li>
                         </ol>
                     </div>
                 </div>
@@ -99,8 +99,6 @@
                                         <td><?php echo $row['umur']; ?></td>
                                         <td><?php echo $row['jabatan']; ?></td>
                                         <td><a href="#" class="btn btn-outline-success">Detail</a>
-                                            <a href="#" class="btn btn-outline-primary">Edit</a>
-                                            <a href="#" class="btn btn-outline-danger">Hapus</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -113,8 +111,6 @@
                     </table>
 
                 </div>
-
-
             </div>
         </div>
         <!--**********************************

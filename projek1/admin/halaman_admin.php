@@ -80,9 +80,16 @@
                                 <div class="stat-icon d-inline-block">
                                     <i class="ti-money text-success border-success"></i>
                                 </div>
+                                <?php
+                                include '../koneksi.php';
+                                $total_total_query = mysqli_query($koneksi, "SELECT SUM(total_harga) FROM transaksi");
+                                $total_pendapatan = mysqli_fetch_assoc($total_total_query)['SUM(total_harga)'];
+                                $pendapatan =
+                                    "Rp " . number_format($total_pendapatan, 0, ',', '.');
+                                ?>
                                 <div class="stat-content d-inline-block">
                                     <div class="stat-text">Profit</div>
-                                    <div class="stat-digit">1,012</div>
+                                    <div class="stat-digit"><?php echo $pendapatan; ?></div>
                                 </div>
                             </div>
                         </div>
@@ -112,9 +119,14 @@
                                 <div class="stat-icon d-inline-block">
                                     <i class="ti-layout-grid2 text-pink border-pink"></i>
                                 </div>
+                                <?php
+                                include '../koneksi.php';
+                                $total_karyawan_query = mysqli_query($koneksi, "SELECT COUNT(*) FROM karyawan");
+                                $total_karyawan = mysqli_fetch_assoc($total_karyawan_query)['COUNT(*)'];
+                                ?>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Projects</div>
-                                    <div class="stat-digit">770</div>
+                                    <div class="stat-text">Karyawan</div>
+                                    <div class="stat-digit"><?php echo $total_karyawan; ?></div>
                                 </div>
                             </div>
                         </div>

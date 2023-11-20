@@ -71,33 +71,97 @@
                     </div>
                 </div>
                 <div class="row">
-                    <h1>Biodata Karyawan</h1>
-                    <?php
-                    include '../koneksi.php';
 
-                    $query = "SELECT * FROM karyawan";
-                    $result = mysqli_query($koneksi, $query);
-
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                            <div class="card m-2" style="width: 18rem;">
-                                <img src="../images/avatar/1.png" class="card-img-top" alt="<?php echo $row['nama']; ?>">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $row['nama']; ?></h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
+                    <div class="container mt-5">
+                        <div class="card">
+                            <div class="card-header text-white">
+                                <h3 class="card-title">Biodata Karyawan</h3>
                             </div>
-                    <?php
-                        }
-                    } else {
-                        echo '<p>Tidak ada data karyawan.</p>';
-                    }
+                            <?php
+                            include '../koneksi.php';
+                            $no = 1;
+                            $query = "SELECT * FROM karyawan";
+                            $result = mysqli_query($koneksi, $query);
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsUysrs70O7Sxz1A1B518l_nTsUu-Aw32n6_ULhYFSuA&s" alt="Profile Picture" class="img-fluid rounded">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h4><?php echo $row['nama']; ?></h4>
+                                                <p>Jabatan: <strong><?php echo $row['jabatan']; ?></strong></p>
+                                                <p>Alamat: <strong><?php echo $row['alamat']; ?></strong></p>
+                                                <p>Email: <strong><?php echo $row['email']; ?></strong></p>
+                                                <p>Nomor Telepon: <strong>+62 <?php echo $row['mobile']; ?></strong></p>
+                                            </div>
+                                    <?php
+                                }
+                            } else {
+                                echo '<p>Tidak ada data karyawan.</p>';
+                            }
 
-                    mysqli_close($koneksi);
-                    ?>
+                            mysqli_close($koneksi);
+                                    ?>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
                 </div>
+
+
+                <?php
+                // Pagination
+                $per_page = 5; // Jumlah data per halaman
+                include '../koneksi.php';
+                $query = "SELECT * FROM karyawan";
+                $result = mysqli_query($koneksi, $query);
+
+                $total_data = mysqli_num_rows($result);
+                $total_pages = ceil($total_data / $per_page);
+
+                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $offset = ($page - 1) * $per_page;
+
+                $query_pagination = "SELECT * FROM karyawan LIMIT $offset, $per_page";
+                $result_pagination = mysqli_query($koneksi, $query_pagination);
+
+                // ...
+                ?>
+
+                <!-- Pagination -->
+                <div class="container mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <?php
+                            if ($result_pagination && mysqli_num_rows($result_pagination) > 0) {
+                                while ($row = mysqli_fetch_assoc($result_pagination)) {
+                                    // Menampilkan data karyawan
+                                    // ...
+                                }
+                            } else {
+                                echo '<p>Tidak ada data karyawan.</p>';
+                            }
+                            ?>
+                        </div>
+
+                        <!-- Tambahkan bagian ini untuk paginasi -->
+                        <div class="card-footer">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                                            <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- ... -->
 
 
             </div>

@@ -80,7 +80,7 @@
                     <table class="table table-striped">
                         <?php
                         if (isset($_GET['pesan']) && $_GET['pesan'] == 'sukses') {
-                            echo "<div class='alert alert-success' data-dismiss='alert' data-delay='2000'>Data Konsumen berhasil ditambahkan.</div>";
+                            echo "<div class='alert alert-success' data-dismiss='alert' data-delay='2000'>Data User berhasil ditambahkan.</div>";
                         } else if (isset($_GET['pesan']) && $_GET['pesan'] == 'gagal') {
                             echo "<div class='alert alert-danger' data-dismiss='alert' data-delay='2000'>Username sudah tersedia. Silakan gunakan username yang lain</div>";
                         } else if (isset($_GET['pesan']) && $_GET['pesan'] == 'hapus') {
@@ -174,6 +174,15 @@
                             <div class="mb-3">
                                 <label for="tgl-lahir" class="col-form-label">Tanggal Lahir:</label>
                                 <input type="date" class="form-control" name="tgl" id="tgl-lahir" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Karyawan" class="col-form-label">Level:</label>
+                                <select class="form-select" aria-label="Default select example" name="level" id="Jenis-kelamin" required>
+                                    <option selected disabled>Level</option>
+                                    <option value="User">User</option>
+                                    <option value="Karyawan">Karyawan</option>>
+                                </select>
                             </div>
 
                             <div class="mb-3">
