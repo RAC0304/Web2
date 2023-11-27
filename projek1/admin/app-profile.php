@@ -36,8 +36,7 @@
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
-        <?php include 'nav_header.php'; ?>
+        <?php include 'navbar.php'; ?>
 
         <?php include 'header.php'; ?>
 
@@ -63,10 +62,12 @@
                 </div>
                 <!-- row -->
                 <?php
+                $id_karyawan = $_GET['id_karyawan'];
                 $username = $_SESSION['username'];
                 include '../koneksi.php';
                 $no = 1;
-                $data = mysqli_query($koneksi, "SELECT karyawan.*, login.* FROM karyawan INNER JOIN login ON karyawan.roleId = login.id_user WHERE login.username = '$username'");
+                $query = "SELECT * FROM karyawan where id_karyawan='$id_karyawan'";
+                $data = mysqli_query($koneksi, $query);
                 while ($tampil = mysqli_fetch_array($data)) {
                 ?>
                     <div class="row">
