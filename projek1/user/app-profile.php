@@ -36,7 +36,7 @@
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-        <?php include 'navbar.php'; ?>
+        <?php include 'nav_header.php'; ?>
 
         <?php include 'header.php'; ?>
 
