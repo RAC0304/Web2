@@ -137,159 +137,45 @@
                                 <div class="stat-icon d-inline-block">
                                     <i class="ti-link text-danger border-danger"></i>
                                 </div>
+                                <?php
+                                include '../koneksi.php';
+                                $total_barang_query = mysqli_query($koneksi, "SELECT COUNT(*) FROM barang");
+                                $total_barang = mysqli_fetch_assoc($total_barang_query)['COUNT(*)'];
+                                ?>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Referral</div>
-                                    <div class="stat-digit">2,781</div>
+                                    <div class="stat-text">Barang</div>
+                                    <div class="stat-digit"><?= $total_barang; ?></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Fee Collections and Expenses</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="ct-bar-chart mt-5"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="ct-pie-chart"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    // Lakukan query SQL untuk mengambil total pesanan
+                    $total_pesanan_query = mysqli_query($koneksi, "SELECT COUNT(*) AS total_pesanan FROM laporan_pesanan");
+                    $total_pesanan_belum = mysqli_query($koneksi, "SELECT COUNT(*) FROM laporan_pesanan WHERE status_pesanan='Belum Bayar'");
+                    $total_pesanan_sudah = mysqli_query($koneksi, "SELECT COUNT(*) FROM laporan_pesanan WHERE status_pesanan='Sudah Dibayar'");
+                    $total_pesanan_proses = mysqli_query($koneksi, "SELECT COUNT(*) FROM laporan_pesanan WHERE status_pesanan='proses'");
+
+                    // Ambil nilai langsung dari hasil query tanpa perlu menyimpan variabel tambahan
+                    $total_pesanan_belum = mysqli_fetch_assoc($total_pesanan_belum)['COUNT(*)'];
+                    $total_pesanan_sudah = mysqli_fetch_assoc($total_pesanan_sudah)['COUNT(*)'];
+                    $total_pesanan_proses = mysqli_fetch_assoc($total_pesanan_proses)['COUNT(*)'];
+
+                    // Periksa apakah query berhasil dijalankan
+                    if ($total_pesanan_query) {
+                        $total_pesanan = mysqli_fetch_assoc($total_pesanan_query)['total_pesanan'];
+                    } else {
+                        $total_pesanan = 0; // Atur nilai default jika terjadi kesalahan
+                    }
+                    ?>
+                    <h5>Total Pesanan = <?= $total_pesanan; ?></h5>
+                    <h5>Total Pesanan Belum Bayar = <?= $total_pesanan_belum; ?></h5>
+                    <h5>Total Pesanan Sudah Bayar = <?= $total_pesanan_sudah; ?></h5>
+                    <h5>Total Pesanan Proses = <?= $total_pesanan_proses; ?></h5>
                 </div>
 
-                <!-- All expense -->
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="year-calendar"></div>
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Expense</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table student-data-table m-t-20">
-                                        <thead>
-                                            <tr>
-                                                <th>Expense Type</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Email</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-
-                                                <td>
-                                                    Salary
-                                                </td>
-                                                <td>
-                                                    $2000
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-primary">Paid</span>
-                                                </td>
-                                                <td>
-                                                    edumin@gmail.com
-                                                </td>
-                                                <td>
-                                                    10/05/2017
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    Salary
-                                                </td>
-                                                <td>
-                                                    $2000
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-warning">Pending</span>
-                                                </td>
-                                                <td>
-                                                    edumin@gmail.com
-                                                </td>
-                                                <td>
-                                                    10/05/2017
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    Salary
-                                                </td>
-                                                <td>
-                                                    $2000
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-primary">Paid</span>
-                                                </td>
-                                                <td>
-                                                    edumin@gmail.com
-                                                </td>
-                                                <td>
-                                                    10/05/2017
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    Salary
-                                                </td>
-                                                <td>
-                                                    $2000
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-danger">Due</span>
-                                                </td>
-                                                <td>
-                                                    edumin@gmail.com
-                                                </td>
-                                                <td>
-                                                    10/05/2017
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    Salary
-                                                </td>
-                                                <td>
-                                                    $2000
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-primary">Paid</span>
-                                                </td>
-                                                <td>
-                                                    edumin@gmail.com
-                                                </td>
-                                                <td>
-                                                    10/05/2017
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <!--**********************************
@@ -327,7 +213,9 @@
     <!--**********************************
         Scripts
     ***********************************-->
+
     <!-- Required vendors -->
+
     <script src=".././vendor/global/global.min.js"></script>
     <script src=".././js/quixnav-init.js"></script>
     <script src=".././js/custom.min.js"></script>
