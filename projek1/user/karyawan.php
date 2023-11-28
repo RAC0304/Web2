@@ -98,7 +98,8 @@
                                         <td><?php echo $row['nama']; ?></td>
                                         <td><?php echo $row['umur']; ?></td>
                                         <td><?php echo $row['jabatan']; ?></td>
-                                        <td><a href="#" class="btn btn-outline-success">Detail</a>
+                                        <td>
+                                            <a href="./app-profile.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" class="btn btn-outline-success">Detail</a>
                                         </td>
                                     </tr>
                                 </tbody>
