@@ -25,54 +25,53 @@
         $data = mysqli_query($koneksi, $query);
         while ($tampil = mysqli_fetch_array($data)) {
         ?>
-            <form action="proses-edit.php" method="post">
+            <form action="proses_edit_karyawan.php" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="id" value="<?php echo $id_karyawan; ?>"> <!-- Perbaiki variabel $id menjadi $id_karyawan -->
-
+                <input type="hidden" name="id" value="<?= $tampil['id_karyawan']; ?>">
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
-                    <input type="text" name="nama" class="form-control" id="nama" value="<?= $tampil['nama']; ?>">
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?= $tampil['nama']; ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" value="<?= $tampil['email']; ?>"> <!-- Perbaiki value dari 'nama' menjadi 'email' -->
+                    <input type="email" name="email" class="form-control" id="email" value="<?= $tampil['email']; ?>" required> <!-- Perbaiki value dari 'nama' menjadi 'email' -->
                 </div>
 
                 <div class="mb-3">
-                    <label for="alamat" class="form-label">Jenis Kelamin</label>
-                    <input type="text" name="alamat" class="form-control" id="alamat" value="<?= $tampil['jk']; ?>">
+                    <label for="jk" class="form-label">Jenis Kelamin</label>
+                    <select name="jk" class="form-control" id="jk" required>
+                        <option value="Laki-laki" <?= ($tampil['jk'] == 'Laki-laki') ? 'selected' : ''; ?>>Laki-laki</option>
+                        <option value="Perempuan" <?= ($tampil['jk'] == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
-                    <label for="alamat" class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="alamat" class="form-control" id="alamat" value="<?= $tampil['tgl_lahir']; ?>">
+                    <label for="tgl" class="form-label">Tanggal Lahir</label>
+                    <input type="date" name="tgl" class="form-control" id="tgl" value="<?= $tampil['tgl_lahir']; ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="no_hp" class="form-label">No. HP</label>
-                    <input type="text" name="no_hp" class="form-control" id="no_hp" value="<?= $tampil['mobile']; ?>">
+                    <input type="text" name="no_hp" class="form-control" id="no_hp" value="<?= $tampil['mobile']; ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" id="alamat" value="<?= $tampil['alamat']; ?>">
+                    <input type="text" name="alamat" class="form-control" id="alamat" value="<?= $tampil['alamat']; ?>" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="no_hp" class="form-label">Umur</label>
-                    <input type="number" name="no_hp" class="form-control" id="no_hp" value="<?= $tampil['umur'] ?>">
+                    <label for="jabatan" class="form-label">Jabatan</label>
+                    <input type="text" name="jabatan" class="form-control" id="jabatan" value="<?= $tampil['jabatan']; ?>" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="no_hp" class="form-label">Jabatan</label>
-                    <input type="text" name="no_hp" class="form-control" id="no_hp" value="<?= $tampil['jabatan']; ?>">
+                    <label for="foto" class="form-label">Foto</label>
+                    <input type="file" name="foto" class="form-control" id="foto" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="no_hp" class="form-label">Foto</label>
-                    <input type="number" name="no_hp" class="form-control" id="no_hp" value="<?= $tampil['foto']; ?>">
-                </div>
                 <!-- Tambahkan field Jenis Kelamin, Tanggal Lahir, No. HP, Alamat, Umur, Jabatan, dan Foto sesuai kebutuhan -->
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
