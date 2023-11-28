@@ -100,7 +100,7 @@
                                         <td><?php echo $row['jabatan']; ?></td>
                                         <td>
                                             <a href="./app-profile.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" class="btn btn-outline-success">Detail</a>
-                                            <a href="edit_karyawan.php" class="btn btn-outline-primary">Edit</a>
+                                            <a href="./edit_karyawan.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" class="btn btn-outline-primary">Edit</a>
                                             <a href="../delete.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" class="btn btn-outline-danger">Hapus</a>
                                         </td>
                                     </tr>

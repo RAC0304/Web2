@@ -1,4 +1,4 @@
-  <link rel="icon" type="image/png" sizes="16x16" href=". ././images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href=".././images/favicon.png">
   <link href=".././vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
   <link rel="stylesheet" href=".././icons/font-awesome-old/css/font-awesome.min.css">
   <link href=".././vendor/chartist/css/chartist.min.css" rel="stylesheet">

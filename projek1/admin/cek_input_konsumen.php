@@ -16,6 +16,11 @@ $level = $_POST['level'];
 $query = "SELECT * FROM login WHERE username = '$username'";
 $result = mysqli_query($koneksi, $query);
 
+// Menghitung umur
+$tanggal_lahir_obj = new DateTime($tanggal_lahir);
+$sekarang = new DateTime();
+$umur = $sekarang->diff($tanggal_lahir_obj)->y;
+
 // cek apakah ada data user yang ditemukan
 if (mysqli_num_rows($result) > 0) {
     // username sudah tersedia
@@ -37,7 +42,7 @@ if (mysqli_num_rows($result) > 0) {
         // Jika level user, masukkan data ke tabel users
         mysqli_query($koneksi, "INSERT INTO users (`id`, `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `roleId`, `createAt`, `updateAt`) VALUES (NULL, '$nama', '$email', '$jk', '$tanggal_lahir', '$no_handphone', '$id_user', current_timestamp(), current_timestamp())");
     } elseif ($level == 'Karyawan') {
-        mysqli_query($koneksi, "INSERT INTO karyawan ( `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `roleId`, `jabatan`) VALUES ('$nama', '$email', '$jk', '$tanggal_lahir', '$no_handphone', '$id_user', 'Pegawai')");
+        mysqli_query($koneksi, "INSERT INTO karyawan ( `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `roleId`, `jabatan`,umur) VALUES ('$nama', '$email', '$jk', '$tanggal_lahir', '$no_handphone', '$id_user', 'Pegawai','$umur')");
     }
 
     // alihkan ke halaman login kembali
