@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Nov 2023 pada 08.33
+-- Waktu pembuatan: 28 Nov 2023 pada 08.01
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -71,9 +71,10 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id_karyawan`, `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `alamat`, `roleId`, `umur`, `jabatan`, `foto`) VALUES
-(1, 'asas', 'rendyariesta0@gmail.com', 'laki-laki', '2023-11-01', 82323232, NULL, 20, 0, 'Pegawai', NULL),
-(2, 'sdsd', 'rain123@gmail.com', 'cewek', '2023-11-01', 0, 'sdsdsdsd', 20, 21, 'sdsdsdsd', NULL),
-(3, 'sdsd', 'rain123@gmail.com', 'cewek', '2023-11-01', 0, 'sdsdsdsd', 20, 21, '12', NULL);
+(1, 'rendy', 'rendyariesta12@gmail.com', 'Laki-laki', '1990-05-15', 812, 'Jl. Penggilingan Baru No.07, RT.12/RW.03, Kel. Dukuh, Kec. Kramat Jati, Jakarta Timur', 20, 33, 'Pegawai', '162-1621032_one-piece-anime-one-cartoon-faces-kepala-anime.png'),
+(4, 'chiesa anugerah', 'chiesa121@aad.com', 'laki-laki', '2023-10-30', 827382732, NULL, 21, 0, 'Pegawai', NULL),
+(5, 'fadel atalah', 'fadel123@gmail.com', 'laki-laki', '2023-11-28', 23232, NULL, 22, 0, 'Pegawai', NULL),
+(6, 'zacky sholeh', 'zacky1203@baba.com', 'laki-laki', '2023-11-02', 2132312, NULL, 24, 0, 'Pegawai', NULL);
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,10 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`id_user`, `username`, `password`, `level`, `ibu`) VALUES
 (1, 'admin1', 'vangke', 'admin', ''),
 (17, 'rendy', '1203kd', 'user', 'milan'),
-(20, 'asasa', 'asasa', 'karyawan', 'siti');
+(20, 'asasa', 'asasa', 'karyawan', 'siti'),
+(21, 'chiesa', '123', 'karyawan', 'gfgfgf'),
+(22, 'fadel', '123', 'karyawan', 'erere'),
+(24, 'jaki', '123', 'karyawan', 'sdsdsds');
 
 -- --------------------------------------------------------
 
@@ -229,7 +233,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_pesanan`
@@ -241,13 +245,13 @@ ALTER TABLE `laporan_pesanan`
 -- AUTO_INCREMENT untuk tabel `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
