@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
     <!-- Favicon icon -->
     <?php
     include 'css.php';
@@ -71,10 +70,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <h1>Biodata Karyawan</h1>
+                    <h1 class="">Biodata Karyawan</h1>
 
                     <table class="table table-striped table-hover text-center">
-
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -84,15 +82,15 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <?php
-                        include '../koneksi.php';
-                        $no = 1;
-                        $query = "SELECT * FROM karyawan";
-                        $result = mysqli_query($koneksi, $query);
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                                <tbody>
+                        <tbody>
+                            <?php
+                            include '../koneksi.php';
+                            $no = 1;
+                            $query = "SELECT * FROM karyawan";
+                            $result = mysqli_query($koneksi, $query);
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $row['nama']; ?></td>
@@ -104,42 +102,16 @@
                                             <a href="../delete.php?id_karyawan=<?php echo $row['id_karyawan']; ?>" class="btn btn-outline-danger">Hapus</a>
                                         </td>
                                     </tr>
-                                </tbody>
-                        <?php
+                            <?php
+                                }
+                            } else {
+                                echo '<tr><td colspan="5">Tidak ada data karyawan.</td></tr>';
                             }
-                        } else {
-                            echo '<p>Tidak ada data karyawan.</p>';
-                        }
-                        ?>
+                            ?>
+                        </tbody>
                     </table>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="message-text" class="col-form-label">Message:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Send message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
 
 
             </div>

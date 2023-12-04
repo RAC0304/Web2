@@ -4,9 +4,10 @@ include '../koneksi.php';
 function generateUniqueTransactionCode()
 {
     $timestamp = date('YmdHis'); // Mendapatkan tanggal dan waktu dalam format YYYYMMDDHHIISS
-    $random_chars = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6); // Mengambil 4 karakter acak dari kumpulan karakter yang ditentukan
+    $detik = date('s'); // Mendapatkan nilai detik saat ini
+    $random_chars = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6); // Mengambil 6 karakter acak dari kumpulan karakter yang ditentukan
 
-    $unique_code = "TRX{$timestamp}{$random_chars}"; // Gabungkan semua elemen untuk membentuk kode unik transaksi
+    $unique_code = "TRX{$timestamp}{$detik}{$random_chars}"; // Gabungkan semua elemen untuk membentuk kode unik transaksi
     return $unique_code;
 }
 

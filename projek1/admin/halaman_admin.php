@@ -170,10 +170,33 @@
                         $total_pesanan = 0; // Atur nilai default jika terjadi kesalahan
                     }
                     ?>
-                    <h5>Total Pesanan = <?= $total_pesanan; ?></h5>
-                    <h5>Total Pesanan Belum Bayar = <?= $total_pesanan_belum; ?></h5>
-                    <h5>Total Pesanan Sudah Bayar = <?= $total_pesanan_sudah; ?></h5>
-                    <h5>Total Pesanan Proses = <?= $total_pesanan_proses; ?></h5>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5 class="card">Total Pesanan</h5>
+                            <p class="card-text">
+                                <?= $total_pesanan; ?>
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card">Total Pesanan Belum Bayar</h5>
+                            <p class="card-text">
+                                <?= $total_pesanan_belum; ?>
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card">Total Pesanan Sudah Bayar</h5>
+                            <p class="card-text">
+                                <?= $total_pesanan_sudah; ?>
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card">Total Pesanan Proses</h5>
+                            <p class="card-text">
+                                <?= $total_pesanan_proses; ?>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

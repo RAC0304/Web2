@@ -6,12 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
     <!-- Favicon icon -->
     <?php
     include 'css.php';
     ?>
-    <title><?php echo $judul_halaman; ?>Transaksi</title>
+
 </head>
 
 <body>
@@ -65,56 +64,78 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">Main Menu</li>
-                            <li class="breadcrumb-item active"><a href="./transaksi.php">Transaksi</a></li>
+                            <li class="breadcrumb-item active"><a href="./transaksi.php">Detail Transaksi</a></li>
                         </ol>
                     </div>
                 </div>
-                <div class="row">
+                <?php
+                $username = $_SESSION['username'];
+                $id_transaksi = $_GET['id_transaksi'];
+                $query_get_id_users = "SELECT users.id 
+                      FROM login
+                      INNER JOIN users ON login.id_user = users.roleId 
+                      WHERE login.username = ?";
+                $stmt_get_id_users = mysqli_prepare($koneksi, $query_get_id_users);
+                mysqli_stmt_bind_param($stmt_get_id_users, "s", $username);
+                mysqli_stmt_execute($stmt_get_id_users);
+                $result_id_users = mysqli_stmt_get_result($stmt_get_id_users);
+                $row_id_users = mysqli_fetch_assoc($result_id_users);
+                $id_users = $row_id_users['id'];
 
-                    <table class="table ">
+                $data_pesanan = array();
+
+                $query_combined = "
+                            SELECT
+                                COALESCE(laporan_pesanan.id_pesanan) AS id_transaksi,
+                                users.nama AS nama_users,
+                                barang.nama_barang,
+                                barang.harga,
+                                COALESCE(laporan_pesanan.jumlah, 0) AS jumlah,
+                                COALESCE(laporan_pesanan.tanggal_pesanan) AS tanggal_pesanan,
+                                COALESCE(laporan_pesanan.status_pesanan, 'Sudah Dibayar') AS status_pesanan,
+                                COALESCE((laporan_pesanan.jumlah * barang.harga), 0) AS total_harga
+                            FROM
+                                users
+                                LEFT JOIN laporan_pesanan ON laporan_pesanan.id_users = users.id AND laporan_pesanan.status_pesanan = 'Sudah Dibayar'
+                                LEFT JOIN barang ON COALESCE(laporan_pesanan.id_barang, 0) = barang.id_barang
+                                LEFT JOIN transaksi ON laporan_pesanan.id_pesanan = transaksi.id_pesanan
+                            WHERE
+                                users.id = ? AND transaksi.id_transaksi = ?
+                        ";
+
+                $stmt_combined = mysqli_prepare($koneksi, $query_combined);
+                mysqli_stmt_bind_param($stmt_combined, "is", $id_users, $id_transaksi);
+                mysqli_stmt_execute($stmt_combined);
+                $result_combined = mysqli_stmt_get_result($stmt_combined);
+                ?>
+                <div class="row">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">NO</th>
-                                <th scope="col">ID Transaksi</th>
-                                <th scope="col">Metode Pembayaran</th>
-                                <th scope="col">Total Harga</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Harga</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            include '../koneksi.php';
-
                             $no = 1;
-                            $query_transaksi = "SELECT id_transaksi, metode_pembayaran, SUM(total_harga) as total_harga
-                        FROM transaksi
-                        GROUP BY id_transaksi";
-                            $result_transaksi = mysqli_query($koneksi, $query_transaksi);
 
-                            if (mysqli_num_rows($result_transaksi) > 0) {
-                                while ($row_transaksi = mysqli_fetch_assoc($result_transaksi)) {
-                                    $total_harga = $row_transaksi['total_harga'];
-                                    $total_harga_rupiah = "Rp " . number_format($total_harga, 0, ',', '.');
-                                    $id_transaksi = $row_transaksi['id_transaksi'];
+                            while ($row_combined = mysqli_fetch_assoc($result_combined)) {
+                                $id_transaksi = $row_combined['id_transaksi'];
                             ?>
-                                    <tr>
-                                        <th scope="row"><?php echo $no++; ?></th>
-                                        <td><?php echo $id_transaksi; ?></td>
-                                        <td><?php echo $row_transaksi['metode_pembayaran']; ?></td>
-                                        <td><?php echo $total_harga_rupiah; ?></td>
-                                        <td>
-                                            <a href="./detail_transaksi.php?id_transaksi=<?php echo $id_transaksi; ?>" class="btn btn-outline-primary">Detail</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row"><?php echo $no++; ?></th>
+                                    <td><?php echo $row_combined['nama_barang']; ?></td>
+                                    <td><?php echo $row_combined['jumlah']; ?></td>
+                                    <td><?php echo "Rp " . number_format($row_combined['total_harga'], 0, ',', '.'); ?></td>
+                                </tr>
                             <?php
-                                }
-                            } else {
-                                echo "<tr><td colspan='5'>Data Transaksi tidak ditemukan.</td></tr>";
                             }
                             ?>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -150,30 +171,6 @@
     <?php
     include 'js.php';
     ?>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.btn-detail').on('click', function() {
-                var id_transaksi = $(this).data('id_transaksi');
-                $.ajax({
-                    type: 'POST',
-                    url: 'load_modal_content.php',
-                    data: {
-                        id_transaksi: id_transaksi
-                    },
-                    success: function(data) {
-                        $('#modal-content').html(data);
-                        $('#detailTransaksi_' + id_transaksi).modal('show');
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan saat memuat detail transaksi.');
-                    }
-                });
-            });
-        });
-    </script>
-
     <!-- Circle progress -->
 
 </body>

@@ -76,7 +76,7 @@
                     <div class="welcome-text">
                         <h5 class="">Data Konsumen</h5>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Input Konsumen</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Input Data Users dan Karyawan</button>
                     <table class="table table-striped">
                         <?php
                         if (isset($_GET['pesan']) && $_GET['pesan'] == 'sukses') {
