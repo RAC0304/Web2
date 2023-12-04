@@ -45,8 +45,8 @@ if ($cek > 0) {
     } else {
 
         // alihkan ke halaman login kembali
-        header("location:index.php?login=gagal");
+        header("location:login.php?login=gagal");
     }
 } else {
-    header("location:index.php?login=gagal");
+    header("location:login.php?login=gagal");
 }

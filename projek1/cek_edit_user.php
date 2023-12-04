@@ -30,4 +30,4 @@ mysqli_query($koneksi, "UPDATE login SET username='$username', ibu='$ibu' WHERE 
 mysqli_query($koneksi, "UPDATE users SET nama='$nama', email='$email', jk='$jk', tgl_lahir='$tanggal_lahir', mobile='$no_handphone', updateAt=current_timestamp()) WHERE roleId='$userData[id_user]'");
 
 // Alihkan ke halaman lain (misalnya halaman dashboard)
-header("location:index.php?edit_user=sukses");
+header("location:login.php?edit_user=sukses");

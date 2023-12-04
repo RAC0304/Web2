@@ -78,7 +78,6 @@
                                 <th scope="col">Total Harga</th>
                                 <th scope="col">Tanggal Pesanan</th>
                                 <th scope="col">Status Pesanan</th>
-                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,16 +110,6 @@
                                             echo '<span class="badge badge-danger">' . $status_pesanan . '</span>';
                                         }
                                         ?>
-                                    </td>
-                                    <td scope="row">
-                                        <form class="sm-d-inline" action="proses_edit_status.php" method="post">
-                                            <select name="status" class="form-select">
-                                                <option value="Sudah Dibayar">Sudah Dibayar</option>
-                                                <option value="Belum Dibayar">Belum Dibayar</option>
-                                                <option value="Cancel">Cancel</option>
-                                                <input type="hidden" name="pesanan_id" value="<?php echo $tampil['id_pesanan']; ?>">
-                                            </select> <button class="btn btn-success" type>Update</button>
-                                        </form>
                                     </td>
                                 </tr>
                             <?php

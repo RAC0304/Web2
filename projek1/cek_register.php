@@ -22,7 +22,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "Username sudah tersedia. Silakan gunakan username yang lain.<br>";
     echo "klik disini untuk <a href='cek_register.php'>kembali</a>";
     // alihkan ke halaman login kembali
-    header("location:index.php?pesan=gagal");
+    header("location:login.php?pesan=gagal");
     exit;
 } else {
     // menginput data ke database
@@ -38,5 +38,5 @@ if (mysqli_num_rows($result) > 0) {
     mysqli_query($koneksi, "INSERT INTO users (`id`, `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `roleId`, `createAt`, `updateAt`) VALUES (NULL, '$nama', '$email', '$jk', '$tanggal_lahir', '$no_handphone', '$id_user', current_timestamp(), current_timestamp())");
 
     // alihkan ke halaman login kembali
-    header("location:index.php?pesan=sukses");
+    header("location:login.php?pesan=sukses");
 }
