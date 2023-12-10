@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Nov 2023 pada 08.01
+-- Waktu pembuatan: 10 Des 2023 pada 03.48
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -44,7 +44,9 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `deskripsi_barang`, `harga`, `tanggal_barang`, `stok`, `gambar`) VALUES
 (1, 'Produk A', 'Deskripsi Produk A', 100.00, '2023-10-17', 50, '1.jpeg'),
 (2, 'Produk B', 'Deskripsi Produk B', 150.00, '2023-10-18', 30, '1.jpeg'),
-(3, 'Produk C', 'Deskripsi Produk C', 200.00, '2023-10-19', 20, '1.jpeg');
+(3, 'Produk C', 'Deskripsi Produk C', 200.00, '2023-10-19', 20, '1.jpeg'),
+(4, 'Sepeda gunung', 'Sepeda warna putih', 500000.00, '2023-12-05', 10, 'download (2).jpeg'),
+(5, 'Sepeda gunung', 'Sepeda\r\n', 500000.00, '2023-12-05', 1, 'download (2).jpeg');
 
 -- --------------------------------------------------------
 
@@ -72,7 +74,7 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`id_karyawan`, `nama`, `email`, `jk`, `tgl_lahir`, `mobile`, `alamat`, `roleId`, `umur`, `jabatan`, `foto`) VALUES
 (1, 'rendy', 'rendyariesta12@gmail.com', 'Laki-laki', '1990-05-15', 812, 'Jl. Penggilingan Baru No.07, RT.12/RW.03, Kel. Dukuh, Kec. Kramat Jati, Jakarta Timur', 20, 33, 'Pegawai', '162-1621032_one-piece-anime-one-cartoon-faces-kepala-anime.png'),
-(4, 'chiesa anugerah', 'chiesa121@aad.com', 'laki-laki', '2023-10-30', 827382732, NULL, 21, 0, 'Pegawai', NULL),
+(4, 'chiesa anugerah', 'chiesa121@aad.com', 'laki-laki', '2002-10-30', 827382732, NULL, 21, 0, 'Pegawai', NULL),
 (5, 'fadel atalah', 'fadel123@gmail.com', 'laki-laki', '2023-11-28', 23232, NULL, 22, 0, 'Pegawai', NULL),
 (6, 'zacky sholeh', 'zacky1203@baba.com', 'laki-laki', '2023-11-02', 2132312, NULL, 24, 0, 'Pegawai', NULL);
 
@@ -96,11 +98,11 @@ CREATE TABLE `laporan_pesanan` (
 --
 
 INSERT INTO `laporan_pesanan` (`id_pesanan`, `jumlah`, `tanggal_pesanan`, `status_pesanan`, `id_users`, `id_barang`) VALUES
-(1, 10, '2023-10-24', 'proses', 8, 1),
-(2, 10, '2023-10-24', 'proses', 8, 3),
-(3, 7, '2023-11-18', 'Sudah Dibayar', 8, 1),
-(4, 10, '2023-11-18', 'Belum Bayar', 8, 1),
-(5, 10, '2023-11-18', 'Belum Bayar', 8, 2);
+(20, 10, '2023-12-04', 'Sudah Dibayar', 8, 1),
+(21, 10, '2023-12-04', 'Sudah Dibayar', 8, 2),
+(22, 10, '2023-12-04', 'Sudah Dibayar', 8, 2),
+(23, 10, '2023-12-04', 'Belum Bayar', 8, 1),
+(24, 10, '2023-12-04', 'Belum Bayar', 8, 2);
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,7 @@ INSERT INTO `login` (`id_user`, `username`, `password`, `level`, `ibu`) VALUES
 --
 
 CREATE TABLE `transaksi` (
-  `id_transaksi` varchar(11) NOT NULL,
+  `id_transaksi` varchar(20) NOT NULL,
   `id_pesanan` int(11) NOT NULL,
   `metode_pembayaran` varchar(50) NOT NULL,
   `total_harga` int(11) NOT NULL
@@ -146,7 +148,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_pesanan`, `metode_pembayaran`, `total_harga`) VALUES
-('0', 3, 'VA', 700);
+('TRX20231204092138388', 20, 'VA', 1000),
+('TRX2023120409214747C', 21, 'Transfer', 1500),
+('TRX2023120409214747C', 22, 'Transfer', 1500);
 
 -- --------------------------------------------------------
 
@@ -227,7 +231,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `karyawan`
@@ -239,7 +243,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT untuk tabel `laporan_pesanan`
 --
 ALTER TABLE `laporan_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `login`

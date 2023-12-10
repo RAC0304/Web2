@@ -76,7 +76,7 @@
                     <div class="welcome-text">
                         <h5 class="">Data Konsumen</h5>
                     </div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Input Data Users dan Karyawan</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Input Data Users atau Karyawan</button>
                     <table class="table table-striped">
                         <?php
                         if (isset($_GET['pesan']) && $_GET['pesan'] == 'sukses') {
@@ -114,8 +114,8 @@
                                     <td><?php echo $tampil['tgl_lahir']; ?></td>
                                     <td><?php echo $tampil['mobile']; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="editButton" data-id_user="1">Edit Konsumen</button>
-                                        <a href="../delete.php?id=<?php echo $tampil['id_user']; ?>" class="btn btn-danger">DELETE</a>
+                                        <a href="./edit_konsumen.php?id=<?= $tampil['id_user']; ?>" class="btn btn-outline-primary">Edit Konsumen</a>
+                                        <a href="../delete.php?id=<?php echo $tampil['id_user']; ?>" class="btn btn-outline-danger">DELETE</a>
                                     </td>
 
                                 </tr>
@@ -127,78 +127,7 @@
             </div>
         </div>
 
-        <!-- Modal Input Konsumen -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Input Data Users</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="cek_input_konsumen.php" method="POSt">
-                            <div class="mb-3">
-                                <label for="username" class="col-form-label">Username:</label>
-                                <input type="text" class="form-control" name="username" id="username" required>
-                            </div>
 
-                            <div class="mb-3">
-                                <label for="Password" class="col-form-label">Password:</label>
-                                <input type="password" class="form-control" name="pass" id="Password" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="nama-lengkap" class="col-form-label">Nama Lengkap:</label>
-                                <input type="text" class="form-control" name="nama" id="nama-lengkap" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="Email" class="col-form-label">Email Address:</label>
-                                <input type="email" class="form-control" name="email" id="Email" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="Jenis-kelamin" class="col-form-label">Jenis Kelamin:</label>
-                                <select class="form-select" aria-label="Default select example" name="jk" id="Jenis-kelamin" required>
-                                    <option selected disabled>Jenis Kelamin</option>
-                                    <option value="laki-laki">laki-laki</option>
-                                    <option value="perempuan">Perempuan</option>>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="Mobile" class="col-form-label">No. Handphone:</label>
-                                <input type="number" class="form-control" name="hp" id="Mobile" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tgl-lahir" class="col-form-label">Tanggal Lahir:</label>
-                                <input type="date" class="form-control" name="tgl" id="tgl-lahir" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="Karyawan" class="col-form-label">Level:</label>
-                                <select class="form-select" aria-label="Default select example" name="level" id="Jenis-kelamin" required>
-                                    <option selected disabled>Level</option>
-                                    <option value="User">User</option>
-                                    <option value="Karyawan">Karyawan</option>>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="Ibu" class="col-form-label">Ibu Kandung:</label>
-                                <input type="text" class="form-control" name="ibu" id="Ibu" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- tutup input konsumen -->
     </div>
 
     <!--**********************************

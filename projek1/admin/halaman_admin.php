@@ -146,6 +146,10 @@
                                     <div class="stat-text">Barang</div>
                                     <div class="stat-digit"><?= $total_barang; ?></div>
                                 </div>
+                                <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#tambahBarang">
+                                    Tambah Barang
+                                </button>
+
                             </div>
                         </div>
                     </div>
@@ -170,33 +174,38 @@
                         $total_pesanan = 0; // Atur nilai default jika terjadi kesalahan
                     }
                     ?>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5 class="card">Total Pesanan</h5>
-                            <p class="card-text">
-                                <?= $total_pesanan; ?>
-                            </p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5 class="card">Total Pesanan Belum Bayar</h5>
-                            <p class="card-text">
-                                <?= $total_pesanan_belum; ?>
-                            </p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5 class="card">Total Pesanan Sudah Bayar</h5>
-                            <p class="card-text">
-                                <?= $total_pesanan_sudah; ?>
-                            </p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5 class="card">Total Pesanan Proses</h5>
-                            <p class="card-text">
-                                <?= $total_pesanan_proses; ?>
-                            </p>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pesanan</h5>
+                                <p class="card-text"><?= $total_pesanan; ?></p>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pesanan Belum Bayar</h5>
+                                <p class="card-text"><?= $total_pesanan_belum; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pesanan Sudah Bayar</h5>
+                                <p class="card-text"><?= $total_pesanan_sudah; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pesanan Proses</h5>
+                                <p class="card-text"><?= $total_pesanan_proses; ?></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -204,8 +213,55 @@
         <!--**********************************
             Content body end
         ***********************************-->
+        <!-- modal-start -->
+        <div class="modal fade" id="tambahBarang" tabindex="-1" aria-labelledby="tambahBarangLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tambahBarangLabel">Tambah Barang</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <form action="proses_tambah_barang.php" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="nama_barang" class="form-label">Nama Barang:</label>
+                                    <input type="text" class="form-control" name="nama_barang" id="nama_barang" required>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label for="harga_barang" class="form-label">Harga Barang:</label>
+                                    <input type="number" class="form-control" name="harga_barang" id="harga_barang" required>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label for="stok_barang" class="form-label">Stok Barang:</label>
+                                    <input type="number" class="form-control" name="stok_barang" id="stok_barang" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="gambar_barang" class="form-label">Gambar Barang:</label>
+                                    <input type="file" class="form-control" name="gambar_barang" id="gambar_barang" accept="image/*" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="deskripsi_barang" class="form-label">Deskripsi Barang:</label>
+                                    <textarea class="form-control" name="deskripsi_barang" id="deskripsi_barang" rows="3" required></textarea>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Tambah Barang</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal-end -->
         <!--**********************************
             Footer start
         ***********************************-->
